@@ -2,102 +2,141 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Wedding Countdown</title>
+  <title>Zwane Wedding</title>
   <style>
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
-      font-family: 'Arial', sans-serif;
+      height: 100%;
+      font-family: Arial, sans-serif;
     }
-
-    /* 
-      1) The linear-gradient adds a translucent white overlay.
-      2) Replace "wedding_background.jpg" with your actual image filename/path.
-      3) background-size: contain ensures the entire image is visible (no cropping).
-         If you prefer to fill the screen, switch to background-size: cover.
-    */
-    body {
-      background:
-        linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
-        url("Wedding Image.jpg") center center no-repeat;
-      background-size: cover;
-      background-repeat: no-repeat;
-
+    /* Full-screen collage background covering the entire viewport */
+    .collage-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      /* 5 columns and 4 rows to display 20 images */
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      overflow: hidden;
+    }
+    .collage-background img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Adjust brightness for improved text readability */
+      filter: brightness(0.8);
+    }
+    /* Optional overlay for additional blending */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+    }
+    /* Main content container on top of the background */
+    .content {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-
-    /* Heading container */
-    #heading {
+      height: 100%;
       text-align: center;
-      margin-bottom: 20px;
+      padding: 20px;
     }
-
-    /* Top line: INVITATION/ISIMEMO in bold uppercase blue */
+    /* Heading styling */
     #heading h1 {
-      font-size: 5rem; /* Adjust as needed */
-      color: #1855d1;
+      font-size: 2.5rem;
+      /*font-family: "Brush Script MT", "Lucida Handwriting", cursive;*/
+      font-style: italic;
+      color: black;
       text-transform: uppercase;
       margin: 0;
       letter-spacing: 1px;
     }
-
-    /* Second line: Names & ceremony in a cursive or serif font */
     #heading h2 {
-      font-size: 3rem; /* Adjust as needed */
-      font-family: "Brush Script MT", "Lucida Handwriting", cursive;
-      color: #333; /* You can switch this to white (#fff) if you prefer */
+      font-size: 3rem;
+      color: #333;
       margin: 10px 0 0;
-      font-weight: normal;
+      font-weight: Bold;
+      font-style: Bold;
     }
-
-    /* Countdown container */
+    /* Countdown styling */
     #countdown {
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      text-align: center;
       font-size: 2em;
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
 <body>
-  
-  
-
-  <!-- Heading Section -->
-  <div id="heading">
-    <h1>Traditional Ceremony/ Umgcagco</h1>
-    <h2>Sizwe Zwane and Sanele Dlamini Traditional Ceremony/Umgcagco</h2>
+  <!-- Full-screen collage background with 20 images -->
+  <div class="collage-background">
+    <img src="image1.jpg" alt="Image 1">
+    <img src="image2.jpg" alt="Image 2">
+    <img src="image3.jpg" alt="Image 3">
+    <img src="image4.jpg" alt="Image 4">
+    <img src="image5.jpg" alt="Image 5">
+    <img src="image6.jpg" alt="Image 6">
+    <img src="image7.jpg" alt="Image 7">
+    <img src="image8.jpg" alt="Image 8">
+    <img src="image9.jpg" alt="Image 9">
+    <img src="image10.jpg" alt="Image 10">
+    <img src="image11.jpg" alt="Image 11">
+    <img src="image12.jpg" alt="Image 12">
+    <img src="image13.jpg" alt="Image 13">
+    <img src="image14.jpg" alt="Image 14">
+    <img src="image15.jpg" alt="Image 15">
+    <img src="image16.jpg" alt="Image 16">
+    <img src="image17.jpg" alt="Image 17">
+    <img src="image18.jpg" alt="Image 18">
+    <img src="image19.jpg" alt="Image 19">
+    <img src="image20.jpg" alt="Image 20">
   </div>
-
-  <!-- Countdown Section -->
-  <div id="countdown">Loading countdown...</div>
-
+  <!-- Optional overlay -->
+  <div class="overlay"></div>
+  
+  <!-- Main content -->
+  <div class="content">
+    <div id="heading">
+      <h1>INVITATION/ISIMEMO</h1>
+      <h2>Sizwe Zwane and Sanele Dlamini Traditional Ceremony/Umgcagco</h2>
+    </div>
+    <div id="countdown">Loading countdown...</div>
+  </div>
+  
   <script>
-    // Set your wedding date and time
+    // Set the wedding date and time
     const weddingDate = new Date("June 30, 2025 15:00:00").getTime();
-
+    
     // Update the countdown every second
     const countdownInterval = setInterval(() => {
       const now = new Date().getTime();
       const distance = weddingDate - now;
-
-      // Calculate time remaining
+      
+      // Calculate time components
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      // Display the result
+      
+      // Display the countdown
       document.getElementById("countdown").innerHTML =
         days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-
-      // If the countdown is finished, display a different message
+      
+      // When countdown ends
       if (distance < 0) {
         clearInterval(countdownInterval);
         document.getElementById("countdown").innerHTML = "The wedding has started!";
